@@ -1,8 +1,8 @@
-(function () {
+(function() {
     const handleImageClick = (event) => {
         if (event.target.tagName.toLowerCase() === 'img') {
             const img = event.target;
-            event.target.classList.add('border-red')
+            event.target.classList.add('border-red');
 
             let input = document.querySelector('.alt-input');
             if (!input) {
@@ -14,6 +14,7 @@
 
             input.value = img.alt;
             input.style.display = 'block';
+            input.style.position = 'absolute';
             input.style.top = `${img.offsetTop + img.height + 15}px`;
             input.style.left = `${img.offsetLeft}px`;
             input.focus();
@@ -21,15 +22,14 @@
             input.onblur = () => {
                 img.alt = input.value;
                 input.style.display = 'none';
-                event.target.classList.remove('border-red')
+                event.target.classList.remove('border-red');
             };
-
-        };
+        }
     };
 
     const observeDOMChanges = () => {
         const observer = new MutationObserver(updateAltAttributes);
-        observer.observe(document.body, {childList: true, subtree: true});
+        observer.observe(document.body, { childList: true, subtree: true });
     };
 
     function addNewSection() {
@@ -40,15 +40,13 @@
                <h2>New Section</h2>
                <button class="remove-section-button">Remove Section</button>
             </div>
-           
-           
             <div class="section-main">
                 <img src="https://via.placeholder.com/150" alt="new">
                 <p>Newly added section content goes here.</p>
             </div>
         `;
         document.querySelector('.main-container').prepend(newSection);
-        newSection.querySelector('.remove-section-button').addEventListener('click', function() {
+        newSection.querySelector('.remove-section-button').addEventListener('click', () => {
             newSection.remove();
         });
     }
